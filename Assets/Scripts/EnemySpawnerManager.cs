@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawnerManager : MonoBehaviour
 {
-    [SerializeField] private Enemy _enemyPref;
-    [SerializeField] private Transform[] _spawnPoints;
+    [SerializeField] private SpawnPoint[] _spawnPoints;
     [SerializeField] private float _spawnInterval;
 
     private bool _isSpawning = true;
@@ -24,18 +23,11 @@ public class EnemySpawner : MonoBehaviour
         {
             yield return delay;
             
-            SpawnEnemy(GetRandomSpawnPoint());
+            GetRandomSpawnPoint().SpawnEnemy();
         }
     }
-
-    private void SpawnEnemy(Transform spawnPoint)
-    {
-        Enemy enemy = Instantiate(_enemyPref, spawnPoint.position, spawnPoint.rotation);
-        
-        enemy.Initialize(spawnPoint.forward);
-    }
-
-    private Transform GetRandomSpawnPoint()
+    
+    private SpawnPoint GetRandomSpawnPoint()
     {
         int index = UtilsRandom.GetRandomNumber(0, _spawnPoints.Length - 1);
 
