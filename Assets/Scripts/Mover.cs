@@ -17,6 +17,7 @@ public class Mover : MonoBehaviour
     private void Awake()
     {
         _rigidbody = gameObject.GetComponent<Rigidbody>();
+        _reachRadius = GetComponent<Collider>().bounds.extents.z;
     }
 
     private void FixedUpdate()
@@ -30,6 +31,14 @@ public class Mover : MonoBehaviour
         
         _moveSpeed = speed;
         _rotationSpeed = rotationSpeed;
+    }
+    
+    public bool HasReachedTarget()
+    {
+        if (Vector3.Distance(transform.position, _target.position) <= _reachRadius)
+            return true;
+
+        return false;
     }
 
     private void Move()
@@ -55,11 +64,5 @@ public class Mover : MonoBehaviour
         _rigidbody.MoveRotation(rotation);
     }
 
-    private bool HasReachedTarget()
-    {
-        if (Vector3.Distance(transform.position, _target.position) <= _reachRadius)
-            return true;
-
-        return false;
-    }
+    
 }
