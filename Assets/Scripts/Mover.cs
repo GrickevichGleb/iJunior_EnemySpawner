@@ -6,9 +6,12 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Mover : MonoBehaviour
 {
-    private Vector3 _direction;
-    private float _speed;
-
+    private float _moveSpeed;
+    private float _rotationSpeed = 120f;
+    private float _reachRadius = 1f;
+    
+    private Transform _target;
+    
     private Rigidbody _rigidbody;
     
     private void Awake()
@@ -21,17 +24,42 @@ public class Mover : MonoBehaviour
         Move();
     }
 
-    public void SetupMovement(Vector3 direction, float speed)
+    public void SetupMovement(Transform target, float speed, float rotationSpeed)
     {
-        _direction = direction.normalized;
-        _speed = speed;
+        _target = target;
+        
+        _moveSpeed = speed;
+        _rotationSpeed = rotationSpeed;
     }
 
     private void Move()
     {
-        if (_direction == Vector3.zero)
+        if (_target == null)
             return;
 
-        _rigidbody.velocity = _direction * _speed;
+        if (HasReachedTarget())
+            return;
+
+        RotateTowardsTarget();
+        _rigidbody.velocity = transform.forward * _moveSpeed;
+    }
+
+    private void RotateTowardsTarget()
+    {
+        Vector3 direction = (_target.position - transform.position).normalized;
+        float step = _rotationSpeed * Time.deltaTime;
+        
+        Quaternion rotation = Quaternion.RotateTowards(
+            transform.rotation, Quaternion.LookRotation(direction), step );
+        
+        _rigidbody.MoveRotation(rotation);
+    }
+
+    private bool HasReachedTarget()
+    {
+        if (Vector3.Distance(transform.position, _target.position) <= _reachRadius)
+            return true;
+
+        return false;
     }
 }

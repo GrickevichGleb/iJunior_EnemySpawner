@@ -6,6 +6,8 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 2f;
+    [SerializeField] private float _rotationSpeed = 120f;
+    [SerializeField] private Target _target;
     
     private Mover _mover;
     
@@ -14,8 +16,9 @@ public class Enemy : MonoBehaviour
         _mover = GetComponent<Mover>();
     }
 
-    public void Initialize(Vector3 direction)
+    public void Initialize(Target target)
     {
-        _mover.SetupMovement(direction, _moveSpeed);
+        _target = target;
+        _mover.SetupMovement(_target.transform, _moveSpeed, _rotationSpeed);
     }
 }

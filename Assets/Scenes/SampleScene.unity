@@ -663,6 +663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPref: {fileID: 32867285531553442, guid: 36856c8b3a7e54101817c4022deb3103,
     type: 3}
+  _target: {fileID: 0}
 --- !u!1 &1807374592
 GameObject:
   m_ObjectHideFlags: 0
@@ -709,6 +710,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPref: {fileID: 7360457530980854497, guid: 80b843f39f00a47ca89e15ba1a86da2b,
     type: 3}
+  _target: {fileID: 0}
 --- !u!1 &1907830722
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,6 +757,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPref: {fileID: 8691095424992181967, guid: 5462e1fcc866949c2abaab38d7b17f8b,
     type: 3}
+  _target: {fileID: 0}
 --- !u!1 &1938046686
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,6 +804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPref: {fileID: 2057800069226748996, guid: 3700627be24e34f5193655aae8583af0,
     type: 3}
+  _target: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
