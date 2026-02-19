@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Destruction : MonoBehaviour
+public class Destroyer : MonoBehaviour
 {
     [SerializeField] private float _destroyAfter = 10f;
     

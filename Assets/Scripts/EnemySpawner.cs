@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawnerManager : MonoBehaviour
+public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private SpawnPoint[] _spawnPoints;
     [SerializeField] private float _spawnInterval;
@@ -12,10 +12,10 @@ public class EnemySpawnerManager : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SpawningCoroutine(_spawnInterval));
+        StartCoroutine(SpawnCoroutine(_spawnInterval));
     }
 
-    private IEnumerator SpawningCoroutine(float interval)
+    private IEnumerator SpawnCoroutine(float interval)
     {
         var delay = new WaitForSeconds(interval);
 

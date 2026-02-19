@@ -7,8 +7,8 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 2f;
     [SerializeField] private float _rotationSpeed = 120f;
-    [SerializeField] private Target _target;
     
+    private Target _target;
     private Mover _mover;
     
     private void Awake()

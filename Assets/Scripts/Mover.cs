@@ -8,7 +8,7 @@ public class Mover : MonoBehaviour
 {
     private float _moveSpeed;
     private float _rotationSpeed = 120f;
-    private float _reachRadius = 1f;
+    private float _reachRadiusSqr = 1f;
     
     private Transform _destination;
     
@@ -17,7 +17,8 @@ public class Mover : MonoBehaviour
     private void Awake()
     {
         _rigidbody = gameObject.GetComponent<Rigidbody>();
-        _reachRadius = GetComponent<Collider>().bounds.extents.z;
+        _reachRadiusSqr = GetComponent<Collider>().bounds.extents.z;
+        _reachRadiusSqr *= _reachRadiusSqr;
     }
 
     private void FixedUpdate()
@@ -40,8 +41,10 @@ public class Mover : MonoBehaviour
     {
         if (_destination == null)
             return false;
+
+        Vector3 direction = _destination.position - transform.position;
         
-        if (Vector3.Distance(transform.position, _destination.position) <= _reachRadius)
+        if (direction.sqrMagnitude <= _reachRadiusSqr)
             return true;
 
         return false;
