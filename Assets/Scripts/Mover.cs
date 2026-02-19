@@ -10,7 +10,7 @@ public class Mover : MonoBehaviour
     private float _rotationSpeed = 120f;
     private float _reachRadius = 1f;
     
-    private Transform _target;
+    private Transform _destination;
     
     private Rigidbody _rigidbody;
     
@@ -25,17 +25,23 @@ public class Mover : MonoBehaviour
         Move();
     }
 
-    public void SetupMovement(Transform target, float speed, float rotationSpeed)
+    public void SetupMover(float speed, float rotationSpeed)
     {
-        _target = target;
-        
         _moveSpeed = speed;
         _rotationSpeed = rotationSpeed;
     }
-    
-    public bool HasReachedTarget()
+
+    public void SetDestination(Transform destination)
     {
-        if (Vector3.Distance(transform.position, _target.position) <= _reachRadius)
+        _destination = destination;
+    }
+    
+    public bool HasReachedDestination()
+    {
+        if (_destination == null)
+            return false;
+        
+        if (Vector3.Distance(transform.position, _destination.position) <= _reachRadius)
             return true;
 
         return false;
@@ -43,19 +49,19 @@ public class Mover : MonoBehaviour
 
     private void Move()
     {
-        if (_target == null)
+        if (_destination == null)
             return;
 
-        if (HasReachedTarget())
+        if (HasReachedDestination())
             return;
 
-        RotateTowardsTarget();
+        RotateTowards(_destination);
         _rigidbody.velocity = transform.forward * _moveSpeed;
     }
 
-    private void RotateTowardsTarget()
+    private void RotateTowards(Transform target)
     {
-        Vector3 direction = (_target.position - transform.position).normalized;
+        Vector3 direction = (target.position - transform.position).normalized;
         float step = _rotationSpeed * Time.deltaTime;
         
         Quaternion rotation = Quaternion.RotateTowards(

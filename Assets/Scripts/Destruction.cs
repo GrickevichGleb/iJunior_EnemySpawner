@@ -18,5 +18,10 @@ public class Destruction : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
+        if (other.gameObject.TryGetComponent(out Target _))
+        {
+            Destroy(gameObject);
+        }
     }
 }

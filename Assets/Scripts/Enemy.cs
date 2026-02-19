@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     public void Initialize(Target target)
     {
         _target = target;
-        _mover.SetupMovement(_target.transform, _moveSpeed, _rotationSpeed);
+        _mover.SetupMover(_moveSpeed, _rotationSpeed);
+        _mover.SetDestination(_target.transform);
     }
 }
